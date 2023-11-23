@@ -28,7 +28,7 @@ def modify_data(static_data, iteration):
 
     for minute_data in static_data["minutely"]:
         minute_data["dt"] += 60 * iteration  # Increment by 60 seconds for each iteration
-        minute_data["precipitation"] = random.uniform(0, 10)  # Random precipitation value
+        minute_data["precipitation"] = random.uniform(0, 1.0)   # Random precipitation value
 
     return static_data
 
