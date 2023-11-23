@@ -10,3 +10,6 @@ The `minutely` field in the API gives an hour ahead of precipitation volume fore
 * For processing the stream of minute forecasts we are using Flink
 * For storing the processed stream, we are using cassandra
 * The application runs on your local machine, with docker-compose.
+
+### Flow Diagram:
+![Architecture Diagram](flow-diagram.png)
