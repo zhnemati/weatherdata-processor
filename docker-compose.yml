@@ -39,7 +39,7 @@ services:
     volumes:
       - ./infra/run_flink_job.sh:/opt/flink/run_flink_job.sh
       - type: bind
-        source:  ./WeatherDataProcessor/WeatherDataProcessor/target/WeatherDataProcessor-1.0-jar-with-dependencies.jar
+        source:  ./WeatherDataProcessor/target/WeatherDataProcessor-1.0-jar-with-dependencies.jar
         target: /opt/flink/usrlib/WeatherDataProcessor-1.5.jar
   taskmanager:
     image: flink:1.14.5

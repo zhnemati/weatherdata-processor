@@ -36,7 +36,6 @@ def send_to_kafka(producer, data):
     if data:
         try:
             message = json.dumps(data)
-            print(f"Data : {message}")
             producer.produce(KAFKA_TOPIC, value=message)
             producer.flush()
             print(f"Data sent to Kafka topic '{KAFKA_TOPIC}'")
@@ -45,9 +44,9 @@ def send_to_kafka(producer, data):
 
 def main():
     producer = Producer({'bootstrap.servers': KAFKA_BROKER})
-    static_data = fetch_precipitation_static_response()
+    static_data = fetch_precipitation_static_response(file_path)
     if static_data:
-        for i in range(70):
+        for i in range(15000):
             modified_data = modify_data(static_data.copy(), i)
             send_to_kafka(producer, modified_data)
 
