@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: precipitation-cron-workflow
+spec:
+  schedule: "*/1 * * * *"
+  timezone: "Europe/Amsterdam"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 60
+  workflowSpec:
+    entrypoint: run-script
+    templates:
+    - name: run-script
+      container:
+        image: znemati408/weather_app:latest
+        imagePullPolicy: IfNotPresent

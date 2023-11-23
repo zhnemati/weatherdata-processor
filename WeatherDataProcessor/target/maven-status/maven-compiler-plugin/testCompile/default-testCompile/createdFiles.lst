@@ -1,0 +1,4 @@
+org/local/WeatherDataProcessor/utils/TestDataSource.class
+org/local/WeatherDataProcessor/MainTest$ListCollector.class
+org/local/WeatherDataProcessor/utils/SampleWeatherDataGenerator.class
+org/local/WeatherDataProcessor/MainTest.class

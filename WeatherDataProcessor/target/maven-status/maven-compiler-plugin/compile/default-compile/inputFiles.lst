@@ -1,0 +1,8 @@
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/utils/KafkaProps.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/dataModels/FlattenedWeatherData.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/sink/CassandraSinkSetup.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/dataModels/MinutelyData.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/dataModels/WeatherDataDeserializationSchema.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/dataModels/WeatherData.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/WeatherDataMapFunction.java
+/Users/znemati/weatherApp/WeatherDataProcessor/WeatherDataProcessor/src/main/java/org/local/WeatherDataProcessor/Main.java

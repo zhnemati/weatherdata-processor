@@ -1,0 +1,8 @@
+org/local/WeatherDataProcessor/Main.class
+org/local/WeatherDataProcessor/dataModels/FlattenedWeatherData.class
+org/local/WeatherDataProcessor/dataModels/MinutelyData.class
+org/local/WeatherDataProcessor/sink/CassandraSinkSetup.class
+org/local/WeatherDataProcessor/utils/KafkaProps.class
+org/local/WeatherDataProcessor/dataModels/WeatherData.class
+org/local/WeatherDataProcessor/WeatherDataMapFunction.class
+org/local/WeatherDataProcessor/dataModels/WeatherDataDeserializationSchema.class

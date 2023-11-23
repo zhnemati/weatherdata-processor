@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka:latest
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "weather-data-v2:1:1"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - zookeeper
+
+  mycronjob:
+    build:
+      context: ./producer  # The directory containing the Dockerfile
+      dockerfile: Dockerfile
+    image: weather-data-cronjob
+    depends_on:
+      - kafka
+
+  jobmanager:
+    image: flink:1.14.5
+    ports:
+      - "8081:8081"
+    command: bash -c "/opt/flink/bin/jobmanager.sh start && /opt/flink/run_flink_job.sh"
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+    depends_on:
+      - kafka
+    volumes:
+      - ./infra/run_flink_job.sh:/opt/flink/run_flink_job.sh
+      - type: bind
+        source:  ./WeatherDataProcessor/WeatherDataProcessor/target/WeatherDataProcessor-1.0-jar-with-dependencies.jar
+        target: /opt/flink/usrlib/WeatherDataProcessor-1.5.jar
+  taskmanager:
+    image: flink:1.14.5
+    depends_on:
+      - jobmanager
+    command: taskmanager
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=jobmanager
+
+  cassandra:
+    image: cassandra:latest
+    ports:
+      - "9042:9042"
+    environment:
+      - CASSANDRA_START_RPC=true
+    entrypoint:
+      - sh
+      - -c
+      - |
+        (echo "waiting for cassandra to start up..." && 
+        while ! cqlsh -e "describe keyspaces"; do sleep 2; done && 
+        cqlsh -f /init_cassandra.cql) &
+        docker-entrypoint.sh cassandra -f
+    volumes:
+      - cassandra_data:/var/lib/cassandra
+      - ./infra/cassandra_setup/init_cassandra.cql:/init_cassandra.cql 
+volumes:
+  cassandra_data:
